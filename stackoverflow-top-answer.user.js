@@ -10,13 +10,25 @@
 /* jshint -W097 */
 'use strict';
 
-// Your code here...
 var $ = document.querySelector.bind(document);
-var $accepted = $('div.accepted-answer');
-var $topLink = $('div.accepted-answer ~ a');
-var $top = $('div.accepted-answer ~ a ~ div.answer');
-var $parent = $top.parentNode;
-$topLink.remove();
-$top.remove();
-$parent.insertBefore($top, $accepted);
-$parent.insertBefore($topLink, $top);
+var $$ = document.querySelectorAll.bind(document);
+
+var $counts = $$('.answer .vote-count-post');
+var bestId;
+for (var $count, i=0; ($count=$counts[i]); i++) {
+  if ($count.innerText.trim()) {
+    bestId = $count.parentElement.querySelector('input[name="_id_"]').getAttribute('value');
+    break;
+  }
+}
+var topId = $('.answer').id.replace(/^answer-/, '');
+if (topId != bestId) {
+    var $topLink = $('a[name="' + $('.answer').id + '"]');
+    var $best = $('#answer-' + bestId);
+    var $bestLink = $('a[name="' + bestId + '"]');
+    $bestLink.remove();
+    $best.remove();
+    var $answers = $('#answers');
+    $answers.insertBefore($best, $topLink);
+    $answers.insertBefore($bestLink, $best);
+}
