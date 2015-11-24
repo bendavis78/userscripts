@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  Show the global calendar link in the main toolbar
 // @author       Ben Davis <bendavis78@gmail.com>
-// @match        http://freedcamp.com/*
+// @match        https://freedcamp.com/*
 // @run-at       document-idle
 // ==/UserScript==
 /* jshint -W097 */
